@@ -240,7 +240,7 @@ Transform:
   m_GameObject: {fileID: 274860948}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 34.4, z: -40.23}
+  m_LocalPosition: {x: 0, y: 34.4, z: 0.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -387,8 +387,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ab2b99a08632c48a7900c2e1e395f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 5
+  runSpeed: 8
+  jumpForce: 5
+  gravity: -9.81
   mouseSensivity: 2
-  cameraPivot: {fileID: 0}
+  cameraPivot: {fileID: 274860949}
 --- !u!143 &637311618
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1468,7 +1472,7 @@ Transform:
   m_GameObject: {fileID: 1739632698}
   serializedVersion: 2
   m_LocalRotation: {x: -0.016684167, y: 0.046254396, z: 0.00077265094, w: 0.9987901}
-  m_LocalPosition: {x: 898, y: 42.300003, z: 223.01}
+  m_LocalPosition: {x: 895.7, y: 44.99, z: 239.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1534,7 +1538,7 @@ Transform:
   m_GameObject: {fileID: 1941191806}
   serializedVersion: 2
   m_LocalRotation: {x: -0.016684167, y: 0.046254396, z: 0.00077265094, w: 0.9987901}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -2.3, y: 2.69, z: -34.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
