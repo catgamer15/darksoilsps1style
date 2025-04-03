@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 7085a7f42ef606e418c2ee83fbbad974
+guid: 0af7b712a96fad648aa2025c3eb93ed0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Knight_Mat_Inst_Pbr
+    second: {fileID: 2100000, guid: bc370bc965f304546afdaec257586a8a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Weapons_01_mat_Pbr
+    second: {fileID: 2100000, guid: b7eccab72a813744cb9ec73e494d1efa, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
