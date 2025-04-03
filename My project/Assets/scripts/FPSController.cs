@@ -19,6 +19,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] private float mouseSensivity = 2f;
     [SerializeField] private Transform cameraPivot;
     
+
     private CharacterController controller;
     private float verticalSpeed;
     void Start()
@@ -31,6 +32,8 @@ public class FPSController : MonoBehaviour
    
     void Update()
     {
+       
+
         HandleLook();
         HandleMovement();
     }
@@ -84,3 +87,4 @@ public class FPSController : MonoBehaviour
         controller.Move(move * Time.deltaTime);
     }
 }
+
