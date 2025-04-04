@@ -25,6 +25,10 @@ public class ControllerAnimation : MonoBehaviour
             animator.SetBool("isWalking", true);
         }
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("Attacking");
+        }
 
 }
 }
