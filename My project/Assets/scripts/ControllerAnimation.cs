@@ -9,7 +9,7 @@ public class ControllerAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -17,7 +17,8 @@ public class ControllerAnimation : MonoBehaviour
     {
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
-        if (moveX == 0 && moveY == 0) { 
+        if (moveX == 0 && moveY == 0)
+        {
             animator.SetBool("isWalking", false);
         }
         else
@@ -29,6 +30,11 @@ public class ControllerAnimation : MonoBehaviour
         {
             animator.SetTrigger("Attacking");
         }
-
-}
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            {
+                animator.SetTrigger("Heal");
+            }
+        }
+    }
 }
