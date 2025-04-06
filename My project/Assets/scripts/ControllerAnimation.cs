@@ -30,11 +30,6 @@ public class ControllerAnimation : MonoBehaviour
         {
             animator.SetTrigger("Attacking");
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            {
-                animator.SetTrigger("Heal");
+
             }
         }
-    }
-}
