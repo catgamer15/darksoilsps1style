@@ -22,6 +22,9 @@ public class FPSController : MonoBehaviour
 
     private CharacterController controller;
     private float verticalSpeed;
+
+    private bool isAttacking = false;
+    private float attackTime = 2f;
     void Start()
     {
         controller = GetComponent<CharacterController>(); 
@@ -32,10 +35,11 @@ public class FPSController : MonoBehaviour
    
     void Update()
     {
-       
-
         HandleLook();
-        HandleMovement();
+        if (!isAttacking)
+        { 
+            HandleMovement();
+        }
     }
     private void HandleLook()
     {
@@ -61,6 +65,11 @@ public class FPSController : MonoBehaviour
     }
     private void HandleMovement()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(AttackDelay());
+        }
+
         float speed;
         if (Input.GetKey(KeyCode.LeftShift)) 
             speed = runSpeed;
@@ -79,12 +88,14 @@ public class FPSController : MonoBehaviour
         }
         verticalSpeed += gravity * Time.deltaTime;
         move.y = verticalSpeed;
-
-
-
-
-
         controller.Move(move * Time.deltaTime);
+    }
+
+    IEnumerator AttackDelay()
+    {
+        isAttacking = true;
+        yield return new WaitForSeconds(attackTime);
+        isAttacking = false;
     }
 }
 
