@@ -24,5 +24,7 @@ public class ControllerAnimation : MonoBehaviour
             animator.SetTrigger("Attacking");
         }
 
-            }
-        }
+
+
+    }
+}
