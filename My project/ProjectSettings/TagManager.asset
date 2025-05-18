@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Campfire
+  - Enemy
   layers:
   - Default
   - TransparentFX

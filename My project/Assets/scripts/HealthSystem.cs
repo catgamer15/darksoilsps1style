@@ -1,110 +1,135 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthSystem : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
-    // Максимальное здоровье
-    public float maxHealth = 100f;
-    // Текущее здоровье
-    private float currentHealth;
+    public Slider healthSlider;        // РџРѕР»РѕСЃР° HP
+    public Text healsText;             // РўРµРєСЃС‚ РґР»СЏ С…РёР»РѕРє
+    public int maxHealth = 100;        // РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РґРѕСЂРѕРІСЊРµ
+    private int currentHealth;
 
-    // Максимальное количество хилок
-    public int maxHills = 5;
-    // Текущее количество хилок
-    private int currentHills;
+    public int maxHeals = 3;           // РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ С…РёР»РѕРє
+    private int currentHeals;
 
-    // UI элементы
-    public Slider healthSlider;      // Полоса здоровья
-    public Text hillsText;           // Текст для отображения хилок
-
-    // Время восстановления хилок и здоровья при подходе к костру
-    public float restoreAmount = 20f;   // Количество восстанавливаемого HP
-    public int restoreHills = 1;        // Количество восстанавливаемых хилок
+    public float campfireRadius = 3f;  // Р Р°РґРёСѓСЃ РґРµР№СЃС‚РІРёСЏ РєРѕСЃС‚СЂР°
 
     void Start()
     {
         currentHealth = maxHealth;
-        currentHills = maxHills;
-        UpdateUI();
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = currentHealth;
+
+        currentHeals = maxHeals;
+        UpdateHealsDisplay();
     }
 
-    void Update()
+    void UpdateHealsDisplay()
     {
-        // Для теста: нажмите H, чтобы получить урон
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            TakeDamage(20f);
-        }
-        // Для теста: нажмите R, чтобы восстановить здоровье и хилки при подходе к костру
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RestAtCampfire();
-        }
-        // Для теста: нажмите Q, чтобы использовать хилки для восстановления HP
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            UseHills();
-        }
+        healsText.text = "Hills: " + currentHeals;
     }
 
-    public void TakeDamage(float damage)
+    // РњРµС‚РѕРґ РїРѕР»СѓС‡РµРЅРёСЏ СѓСЂРѕРЅР°
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if (currentHealth < 0)
-            currentHealth = 0;
-
-        UpdateUI();
+        if (currentHealth < 0) currentHealth = 0;
+        UpdateHealthUI();
 
         if (currentHealth == 0)
         {
-            Debug.Log("Игрок умер");
-            // Можно добавить логику смерти здесь
+            Debug.Log("РРіСЂРѕРє СѓРјРµСЂ");
+            // РњРѕР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ Р»РѕРіРёРєСѓ СЃРјРµСЂС‚Рё
         }
     }
 
-    public void Heal(float amount)
+    // РњРµС‚РѕРґ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ Р·РґРѕСЂРѕРІСЊСЏ РїРѕ РєРЅРѕРїРєРµ R
+    public void RestoreHealth()
     {
-        currentHealth += amount;
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
-
-        UpdateUI();
+        if (currentHealth < maxHealth)
+        {
+            currentHealth += 20; // Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РЅР° 20, РјРѕР¶РЅРѕ РёР·РјРµРЅРёС‚СЊ
+            if (currentHealth > maxHealth) currentHealth = maxHealth;
+            UpdateHealthUI();
+            Debug.Log("Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРѕ Р·РґРѕСЂРѕРІСЊРµ");
+        }
     }
 
-    public void UseHills()
+    // РњРµС‚РѕРґ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С…РёР»РєРё (РјРѕР¶РЅРѕ РІС‹Р·РІР°С‚СЊ РїРѕ РєРЅРѕРїРєРµ РёР»Рё РїРѕ СѓСЃР»РѕРІРёСЋ)
+    public void UseHeal()
     {
-        if (currentHills > 0 && currentHealth < maxHealth)
+        if (currentHeals > 0 && currentHealth < maxHealth)
         {
-            currentHills--;
-            Heal(20f); // Восстановление на 20 HP за одну хилку
-            UpdateUI();
+            currentHeals--;
+            currentHealth += 30; // Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РЅР° 30, РјРѕР¶РЅРѕ РёР·РјРµРЅРёС‚СЊ
+            if (currentHealth > maxHealth) currentHealth = maxHealth;
+            UpdateHealthUI();
+            UpdateHealsDisplay();
+            Debug.Log("РСЃРїРѕР»СЊР·РѕРІР°РЅР° С…РёР»РєР°");
         }
         else
         {
-            Debug.Log("Нет хилок или здоровье уже полное");
+            Debug.Log("РќРµС‚ С…РёР»РѕРє РёР»Рё Р·РґРѕСЂРѕРІСЊРµ СѓР¶Рµ РјР°РєСЃРёРјСѓРј");
         }
     }
 
+    void UpdateHealthUI()
+    {
+        healthSlider.value = currentHealth;
+    }
+
+    // Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РїСЂРё РїРѕРґС…РѕРґРµ Рє РєРѕСЃС‚СЂСѓ
     public void RestAtCampfire()
     {
-        // Восстановление HP и хилок при подходе к костру
-        Heal(restoreAmount);
-        currentHills += restoreHills;
-        if (currentHills > maxHills)
-            currentHills = maxHills;
-
-        UpdateUI();
+        currentHealth = maxHealth;
+        currentHeals = maxHeals;
+        UpdateHealthUI();
+        UpdateHealsDisplay();
+        Debug.Log("Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРѕ Р·РґРѕСЂРѕРІСЊРµ Рё С…РёР»РєРё");
     }
 
-    private void UpdateUI()
+    private void OnTriggerEnter(Collider other)
     {
-        healthSlider.value = currentHealth / maxHealth;
-        hillsText.text = "Хилки: " + currentHills;
+        if (other.CompareTag("Enemy"))
+        {
+            TakeDamage(20);
+            Destroy(other.gameObject); // РЈРґР°Р»СЏРµРј РІСЂР°РіР° РїРѕСЃР»Рµ СѓРґР°СЂР°, РїРѕ Р¶РµР»Р°РЅРёСЋ
+        }
+        else if (other.CompareTag("Campfire"))
+        {
+            RestAtCampfire();
+        }
     }
 
-    // Метод для получения урона от врага, вызываемый из другого скрипта или триггера
-    public void ReceiveDamageFromEnemy(float damage)
+    private void Update()
     {
-        TakeDamage(damage);
+        // Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РїСЂРё РїРѕРґС…РѕРґРµ Рє РєРѕСЃС‚СЂСѓ РЅР° СЂР°РґРёСѓСЃРµ
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, campfireRadius);
+        bool nearCampfire = false;
+
+        foreach (var collider in hitColliders)
+        {
+            if (collider.CompareTag("Campfire"))
+            {
+                nearCampfire = true;
+                break;
+            }
+        }
+
+        if (nearCampfire)
+        {
+            RestAtCampfire();
+        }
+
+        // Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ Р·РґРѕСЂРѕРІСЊСЏ РїРѕ РєР»Р°РІРёС€Рµ R
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestoreHealth();
+        }
+        
+        // Р”Р»СЏ С‚РµСЃС‚Р°: РЅР°Р¶РјРёС‚Рµ H С‡С‚РѕР±С‹ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ С…РёР»РєСѓ РІСЂСѓС‡РЅСѓСЋ
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            UseHeal();
+        }
     }
 }
