@@ -2,20 +2,12 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public int attackDamage = 20; // урон за атаку
-    public float attackRange = 2f; // радиус атаки
-    public float attackCooldown = 1f; // задержка между атаками
-
-    private float lastAttackTime;
-
-    void Start()
-    {
-        lastAttackTime = -attackCooldown;
-    }
+    public int damage = 20; // урон игрока
+    public float attackRange = 4f; // радиус атаки
+    public KeyCode attackKey = KeyCode.Mouse0; // клавиша для атаки
 
     void Update()
     {
-        // Например, атака по нажатию клавиши Space
         if (Input.GetMouseButtonDown(0))
         {
             Attack();
@@ -24,32 +16,18 @@ public class PlayerAttack : MonoBehaviour
 
     void Attack()
     {
-        if (Time.time - lastAttackTime >= attackCooldown)
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+        foreach (var collider in hitColliders)
         {
-            lastAttackTime = Time.time;
-
-            // Находим врагов в радиусе атаки
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
-            foreach (var collider in hitColliders)
+            if (collider.CompareTag("Enemy"))
             {
-                if (collider.CompareTag("Enemy"))
+                Enemy enemyScript = collider.GetComponent<Enemy>();
+                if (enemyScript != null)
                 {
-                    // Наносим урон врагу
-                    EnemyAI enemy = collider.GetComponent<EnemyAI>();
-                    if (enemy != null)
-                    {
-                        enemy.TakeDamage(attackDamage);
-                        Debug.Log("Игрок нанес урон врагу");
-                    }
+                    enemyScript.TakeDamage(damage);
+                    Debug.Log("Игрок атаковал врага");
                 }
             }
         }
-    }
-
-    // Для визуализации радиуса атаки в редакторе
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

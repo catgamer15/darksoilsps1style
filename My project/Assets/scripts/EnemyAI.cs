@@ -21,6 +21,8 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform; // предполагается, что у игрока тег "Player"
         lastAttackTime = -attackCooldown;
+        agent = GetComponent<NavMeshAgent>();
+    agent.SetDestination(transform.position + Vector3.forward * 10);
     }
 
     void Update()

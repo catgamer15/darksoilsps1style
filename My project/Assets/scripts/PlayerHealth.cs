@@ -3,15 +3,20 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    // UI элементы
     public Slider healthSlider;        // Полоса HP
     public Text healsText;             // Текст для хилок
+
+    // Здоровье
     public int maxHealth = 100;        // Максимальное здоровье
     private int currentHealth;
 
+    // Хилки
     public int maxHeals = 3;           // Максимальное число хилок
     private int currentHeals;
 
-    public float campfireRadius = 3f;  // Радиус действия костра
+    // Радиус действия костра
+    public float campfireRadius = 3f;
 
     void Start()
     {
@@ -38,11 +43,11 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth == 0)
         {
             Debug.Log("Игрок умер");
-            // Можно добавить логику смерти
+            // Можно добавить логику смерти, перезапуск уровня и т.п.
         }
     }
 
-    // Метод восстановления здоровья по кнопке R
+    // Метод восстановления здоровья по кнопке J или при подходе к костру
     public void RestoreHealth()
     {
         if (currentHealth < maxHealth)
@@ -54,7 +59,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    // Метод использования хилки (можно вызвать по кнопке или по условию)
+    // Использование хилки (например, по кнопке R)
     public void UseHeal()
     {
         if (currentHeals > 0 && currentHealth < maxHealth)
@@ -92,7 +97,7 @@ public class PlayerHealth : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             TakeDamage(20);
-            Destroy(other.gameObject); // Удаляем врага после удара, по желанию
+            
         }
         else if (other.CompareTag("Campfire"))
         {
@@ -120,14 +125,14 @@ public class PlayerHealth : MonoBehaviour
             RestAtCampfire();
         }
 
-        // Восстановление здоровья по клавише R
-        if (Input.GetKeyDown(KeyCode.R))
+        // Восстановление здоровья по клавише J
+        if (Input.GetKeyDown(KeyCode.J))
         {
             RestoreHealth();
         }
-        
-        // Для теста: нажмите H чтобы использовать хилку вручную
-        if (Input.GetKeyDown(KeyCode.H))
+
+        // Для теста: нажмите R чтобы использовать хилку вручную
+        if (Input.GetKeyDown(KeyCode.R))
         {
             UseHeal();
         }

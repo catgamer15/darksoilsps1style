@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Campfire
   - Enemy
+  - guardPoint
   layers:
   - Default
   - TransparentFX
