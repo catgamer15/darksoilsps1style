@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; // Для перезагрузки сцены
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth == 0)
         {
             Debug.Log("Игрок умер");
-            // Можно добавить логику смерти, перезапуск уровня и т.п.
+            RestartLevel(); // Перезапуск уровня при смерти
         }
     }
 
@@ -136,5 +137,17 @@ public class PlayerHealth : MonoBehaviour
         {
             UseHeal();
         }
-    }
+        
+       // Можно добавить кнопку для перезапуска после смерти через UI или клавишу, например:
+       if (Input.GetKeyDown(KeyCode.P) && Time.timeScale == 0f)
+       {
+           RestartLevel();
+       }
+   }
+
+   public void RestartLevel()
+   {
+       Time.timeScale = 1f; // Возобновляем время игры перед перезагрузкой сцены
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+   }
 }

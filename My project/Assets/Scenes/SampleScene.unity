@@ -1189,6 +1189,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &523009465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 527d2b95ca401ae42a8ac2b1fc518701, type: 3}
+  m_PrefabInstance: {fileID: 786710477}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &532666145 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3710358743803212655, guid: 2fc18a9dd2ef5cc4c87df048886092c3, type: 3}
@@ -6415,7 +6420,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.224433e-39, y: NaN, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 1e-45, z: 1.1819e-41, w: 7507712}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -6449,8 +6454,6 @@ GameObject:
   - component: {fileID: 637311619}
   - component: {fileID: 637311620}
   - component: {fileID: 637311621}
-  - component: {fileID: 637311623}
-  - component: {fileID: 637311622}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6566,30 +6569,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 10
   damageInterval: 1
---- !u!114 &637311622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637311615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0dfb6220695aa428c737ddf214ea31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &637311623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637311615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0dfb6220695aa428c737ddf214ea31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &643405680
 GameObject:
   m_ObjectHideFlags: 0
@@ -6913,7 +6892,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 7e-45, y: 8e-45, z: 1e-44, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 1e-45, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -7126,7 +7105,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: NaN, z: 1.6978e-41, w: -6.873413e-29}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 1e-45, z: 9.66e-42, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -7596,13 +7575,37 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 527d2b95ca401ae42a8ac2b1fc518701, type: 3}
       insertIndex: -1
       addedObject: {fileID: 382811457}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 527d2b95ca401ae42a8ac2b1fc518701, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 786710479}
   m_SourcePrefab: {fileID: 100100000, guid: 527d2b95ca401ae42a8ac2b1fc518701, type: 3}
 --- !u!4 &786710478 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 527d2b95ca401ae42a8ac2b1fc518701, type: 3}
   m_PrefabInstance: {fileID: 786710477}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &786710479
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523009465}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.072687626
+  m_Center: {x: -0.0010341071, y: -0.030336535, z: 4.740781e-13}
 --- !u!1 &832834057
 GameObject:
   m_ObjectHideFlags: 0
@@ -18323,7 +18326,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: NaN, z: 6e-44, w: 8e-45}
+  m_BoundingSphereOverride: {x: 0, y: 1e-45, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -24996,11 +24999,11 @@ MonoBehaviour:
   guardPoint: {fileID: 249038028}
   patrolRadius: 5
   detectionRange: 100
-  attackRange: 2
+  attackRange: 3
   patrolSpeed: 30
   chaseSpeed: 30
   damageAmount: 30
-  attackCooldown: 1.5
+  attackCooldown: 3
 --- !u!114 &1694920983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25499,7 +25502,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 9.1835e-41, y: 2.0387487e-38, z: 3.26016e-39, w: 3.67342e-40}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -26782,8 +26785,37 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 527d2b95ca401ae42a8ac2b1fc518701, type: 3}
       insertIndex: -1
       addedObject: {fileID: 542351558}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 527d2b95ca401ae42a8ac2b1fc518701, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2133027933}
   m_SourcePrefab: {fileID: 100100000, guid: 527d2b95ca401ae42a8ac2b1fc518701, type: 3}
+--- !u!1 &2133027932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 527d2b95ca401ae42a8ac2b1fc518701, type: 3}
+  m_PrefabInstance: {fileID: 2133027931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &2133027933
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133027932}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.120290704
+  m_Center: {x: -0.016406912, y: -0.088350184, z: 0.018210687}
 --- !u!1 &2137640930
 GameObject:
   m_ObjectHideFlags: 0
