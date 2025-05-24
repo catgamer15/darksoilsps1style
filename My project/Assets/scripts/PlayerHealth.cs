@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
 
     void UpdateHealsDisplay()
     {
-        healsText.text = "Hills: " + currentHeals;
+        healsText.text = "Хилки: " + currentHeals;
     }
 
     // Метод получения урона
