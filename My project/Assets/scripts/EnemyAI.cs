@@ -12,17 +12,29 @@ public class EnemyAI : MonoBehaviour
 
     private NavMeshAgent agent;
     private Transform player;
+    private Animator animator;
 
     private float lastAttackTime;
+
+    private bool playerInRange = false;
+
+    private AudioSource audioSource; // ссылка на компонент AudioSource
+
+    public AudioClip deathSound; // добавьте сюда ваш звук смерти
 
     void Start()
     {
         currentHealth = maxHealth;
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform; // предполагается, что у игрока тег "Player"
         lastAttackTime = -attackCooldown;
-        agent = GetComponent<NavMeshAgent>();
-    agent.SetDestination(transform.position + Vector3.forward * 10);
+
+        audioSource = GetComponent<AudioSource>(); // получаем компонент AudioSource
+        if (audioSource == null)
+        {
+            Debug.LogError("Отсутствует компонент AudioSource на враге");
+        }
     }
 
     void Update()
@@ -34,22 +46,30 @@ public class EnemyAI : MonoBehaviour
             {
                 // Идти к игроку
                 agent.SetDestination(player.position);
+                animator.SetBool("isWalking", true);
+                animator.SetBool("isAttacking", false);
             }
             else
             {
                 // В пределах атаки
-                if (Time.time - lastAttackTime >= attackCooldown)
+                animator.SetBool("isWalking", false);
+
+                if (Time.time - lastAttackTime >= attackCooldown && playerInRange)
                 {
                     Attack();
                     lastAttackTime = Time.time;
                 }
             }
         }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
     }
 
     void Attack()
     {
-        // Предполагается, что у игрока есть скрипт PlayerHealth с методом TakeDamage(int)
+        animator.SetTrigger("attack");
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
@@ -70,6 +90,31 @@ public class EnemyAI : MonoBehaviour
     void Die()
     {
         Debug.Log("Враг убит");
-        Destroy(gameObject);
+        animator.SetTrigger("die");
+        
+        // Воспроизведение звука смерти
+        if (audioSource != null && deathSound != null)
+        {
+            audioSource.PlayOneShot(deathSound);
+        }
+
+        Destroy(gameObject, 1f); // удаляем объект через 2 секунды после смерти
+    }
+
+    // Методы для триггеров
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
     }
 }
