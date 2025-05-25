@@ -8,5 +8,6 @@ public class MainMenu : MonoBehaviour
     {
         // Замените "GameScene" на название вашей игровой сцены
         SceneManager.LoadScene("SampleScene");
+        
     }
 }
