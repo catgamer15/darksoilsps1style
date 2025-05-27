@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public int damage = 10; // урон по врагам
+    public int damage = 20; // урон по врагам
     public float attackRange = 2f; // радиус атаки
     public float attackCooldown = 1f; // задержка между атаками
 
@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1")) // по умолчанию левая кнопка мыши или Ctrl
+        if (Input.GetMouseButtonDown(0))
         {
             if (Time.time - lastAttackTime >= attackCooldown)
             {
@@ -38,10 +38,5 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    // Визуализация радиуса атаки в редакторе
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
+
 }

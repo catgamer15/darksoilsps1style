@@ -48,7 +48,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    // Метод восстановления здоровья по кнопке J или при подходе к костру
+
     public void RestoreHealth()
     {
         if (currentHealth < maxHealth)
@@ -138,7 +138,7 @@ public class PlayerHealth : MonoBehaviour
             UseHeal();
         }
         
-       // Можно добавить кнопку для перезапуска после смерти через UI или клавишу, например:
+       
        if (Input.GetKeyDown(KeyCode.P) && Time.timeScale == 0f)
        {
            RestartLevel();
